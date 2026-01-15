@@ -1,5 +1,5 @@
-output "private_subnet" {
-  value = aws_subnet.private_subnet[each.key]
+output "private_subnet_cidr_blocks" {
+  value = [for s in aws_subnet.private_subnet : s.id]
 }
 
 output "security_group_allow_private_access" {
