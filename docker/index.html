@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Septa | Soluciones Cloud de Próxima Generación</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        .gradient-bg {
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        }
+        .card-hover:hover {
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-slate-50 font-sans text-slate-900">
+
+    <nav class="fixed w-full z-50 bg-slate-900/90 backdrop-blur-md text-white py-4">
+        <div class="container mx-auto px-6 flex justify-between items-center">
+            <div class="text-2xl font-bold tracking-tighter">
+                <span class="text-blue-500">S</span>EPTA
+            </div>
+            <div class="hidden md:flex space-x-8 text-sm font-medium">
+                <a href="#servicios" class="hover:text-blue-400 transition">Servicios</a>
+                <a href="#infraestructura" class="hover:text-blue-400 transition">Infraestructura</a>
+                <a href="#precios" class="hover:text-blue-400 transition">Precios</a>
+                <a href="#" class="bg-blue-600 px-5 py-2 rounded-lg hover:bg-blue-500 transition">Consola Cloud</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="gradient-bg text-white pt-32 pb-20 px-6">
+        <div class="container mx-auto text-center">
+            <h1 class="text-5xl md:text-7xl font-extrabold mb-6 tracking-tight">
+                La nube que evoluciona <br><span class="text-blue-500">con tu negocio</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-10">
+                Septa ofrece infraestructura escalable, seguridad de grado bancario y despliegue automatizado para arquitecturas modernas de microservicios.
+            </p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-blue-600 hover:bg-blue-500 px-8 py-4 rounded-xl font-bold transition">Desplegar ahora</button>
+                <button class="border border-slate-700 hover:bg-slate-800 px-8 py-4 rounded-xl font-bold transition">Ver documentación</button>
+            </div>
+        </div>
+    </header>
+
+    <section id="servicios" class="py-24 px-6">
+        <div class="container mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-3xl font-bold mb-4">Soluciones End-to-End</h2>
+                <p class="text-slate-600">Todo lo que necesitas para tu stack tecnológico en un solo lugar.</p>
+            </div>
+            
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-server text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Compute Engines</h3>
+                    <p class="text-slate-600 mb-4">Instancias de alto rendimiento con CPUs de última generación y almacenamiento NVMe optimizado.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-cubes text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Septa Kubernetes (SKS)</h3>
+                    <p class="text-slate-600 mb-4">Orquestación gestionada de contenedores con auto-scaling nativo y balanceo de carga integrado.</p>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-100 card-hover">
+                    <div class="w-12 h-12 bg-cyan-100 text-cyan-600 rounded-lg flex items-center justify-center mb-6">
+                        <i class="fas fa-shield-halved text-xl"></i>
+                    </div>
+                    <h3 class="text-xl font-bold mb-3">Seguridad Zero-Trust</h3>
+                    <p class="text-slate-600 mb-4">Firewalls de red avanzados, encriptación en reposo y gestión de identidades IAM avanzada.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="precios" class="bg-slate-100 py-24 px-6">
+        <div class="container mx-auto">
+            <h2 class="text-3xl font-bold text-center mb-16">Planes Flexibles</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                
+                <div class="bg-white p-8 rounded-2xl border border-slate-200">
+                    <h4 class="text-sm font-bold uppercase tracking-widest text-slate-500 mb-2">Developer</h4>
+                    <div class="text-4xl font-bold mb-6">$5<span class="text-lg text-slate-400 font-normal">/mes</span></div>
+                    <ul class="space-y-4 mb-8 text-slate-600">
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 1 vCPU</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 2GB RAM</li>
+                        <li><i class="fas fa-check text-green-500 mr-2"></i> 50GB SSD NVMe</li>
+                    </ul>
+                    <button class="w-full py-3 rounded-lg border border-blue-600 text-blue-600 font-bold hover:bg-blue-50 transition">Empezar gratis</button>
+                </div>
+
+                <div class="bg-slate-900 p-8 rounded-2xl border-2 border-blue-500 shadow-xl relative text-white scale-105">
+                    <span class="absolute -top-4 left-1/2 transform -translate-x-1/2 bg-blue-600 text-xs font-bold px-3 py-1 rounded-full">POPULAR</span>
+                    <h4 class="text-sm font-bold
