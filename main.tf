@@ -37,6 +37,7 @@ module "septa_ecr" {
 module "septa_ecs" {
   source = "./ecs"
 
+  repository_url = module.septa_ecr.repository_url
   private_subnet_cidr_block = module.septa_networking.private_subnet_cidr_blocks
   region = var.region
 
