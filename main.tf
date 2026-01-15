@@ -37,7 +37,7 @@ module "septa_ecr" {
 module "septa_ecs" {
   source = "./ecs"
 
-  private_subnet = module.septa_networking.private_subnet
+  private_subnet_cidr_block = module.septa_networking.private_subnet_cidr_blocks
 
 }
 
