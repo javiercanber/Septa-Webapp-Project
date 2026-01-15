@@ -3,7 +3,7 @@ variable "private_subnet" {
     description = "List of private subnet IDs"
 }
 
-variable "security_group_allow_private_access" {
+variable "allow_private_access" {
     type = string
     description = "Security group ID allowing private access"
 }
