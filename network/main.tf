@@ -83,6 +83,31 @@ resource "aws_lb" "alb_septa" {
 
 }
 
+# Target Group for ECS Service
+resource "aws_lb_target_group" "septa_tg" {
+  name        = "septa-webapp-tg"
+  port        = 80
+  protocol    = "HTTP"
+  vpc_id      = aws_vpc.septa_vpc.id
+  target_type = "ip"
+
+  health_check {
+    path = "/"
+  }
+}
+
+# Listener for Application Load Balancer
+resource "aws_lb_listener" "septa_listener" {
+  load_balancer_arn = aws_lb.alb_septa.arn
+  port              = 80
+  protocol          = "HTTP"
+
+  default_action {
+    type             = "forward"
+    target_group_arn = aws_lb_target_group.septa_tg.arn
+  }
+}
+
 # ECR API Endpoint
 resource "aws_vpc_endpoint" "ecr_api" {
   vpc_id              = aws_vpc.septa_vpc.id
