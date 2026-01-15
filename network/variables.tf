@@ -4,7 +4,7 @@ variable "cidr_block" {
 }
 
 variable "public_subnet_cidr_block" {
-  type        = string
+  type        = list(string)
   description = "IP address range for the public subnet"
 }
 
