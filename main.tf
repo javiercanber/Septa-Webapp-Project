@@ -32,6 +32,7 @@ module "septa_networking" {
 
 module "septa_ecr" {
   source = "./ecr"
+  
 }
 
 module "septa_ecs" {
