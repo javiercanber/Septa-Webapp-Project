@@ -32,12 +32,16 @@ module "septa_networking" {
 
 module "septa_ecr" {
   source = "./ecr"
+  
 }
 
 module "septa_ecs" {
   source = "./ecs"
 
-  private_subnet_cidr_block = module.septa_networking.private_subnet_cidr_blocks
+  security_group_allow_private_access = module.septa_networking.security_group_allow_private_access
+  repository_url = module.septa_ecr.repository_url
+  private_subnet_cidr_blocks = module.septa_networking.private_subnet_cidr_blocks
+  region = var.region
 
 }
 
