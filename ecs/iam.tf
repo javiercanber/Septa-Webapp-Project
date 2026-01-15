@@ -33,7 +33,8 @@ resource "aws_iam_policy" "septa_ecs_task_policy" {
         Action = [
           "ecr:GetDownloadUrlForLayer",
           "ecr:BatchGetImage",
-          "ecr:BatchCheckLayerAvailability"
+          "ecr:BatchCheckLayerAvailability",
+          "ecr:GetAuthorizationToken"
         ]
         Effect   = "Allow"
         Resource = "*"
