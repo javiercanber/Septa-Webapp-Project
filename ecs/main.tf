@@ -8,6 +8,12 @@ resource "aws_ecs_cluster" "septa_ecs_cluster" {
   }
 }
 
+# ECS Log Group for Septa Webapp
+resource "aws_cloudwatch_log_group" "septa_logs" {
+  name              = "/ecs/septa-webapp-logs"
+  retention_in_days = 1
+}
+
 resource "aws_ecs_task_definition" "septa_task_definition" {
   family                   = "septa-task-webapp"
   network_mode             = "awsvpc"
