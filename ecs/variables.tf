@@ -1,4 +1,4 @@
-variable "private_subnet" {
-    type = list(string)
-    description = "List of private subnet IDs"
+variable "private_subnet_cidr_block" {
+  type        = list(string)
+  description = "IP address range for the subnet"
 }
