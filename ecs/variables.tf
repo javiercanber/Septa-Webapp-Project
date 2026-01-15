@@ -7,3 +7,8 @@ variable "region" {
   type = string
   description = "AWS Region"
 }
+
+variable "repository_url" {
+  type = string
+  description = "ECR Repository URL"
+}

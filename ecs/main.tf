@@ -20,7 +20,7 @@ resource "aws_ecs_task_definition" "septa_task_definition" {
   container_definitions = jsonencode([
     {
       name      = "septa-webapp"
-      image     = "${aws_ecr_repository.septa_ecr_repo.repository_url}:septa-webapp1.0.0"
+      image     = "${var.repository_url}:septa-webapp1.0.0"
       essential = true
       portMappings = [
         {
