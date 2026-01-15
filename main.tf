@@ -28,7 +28,6 @@ module "septa_networking" {
   private_subnet_cidr_block = module.septa_vpc.private_subnet_cidr_block
   availability_zone = module.septa_vpc.availability_zone
   client_ip = module.septa_vpc.client_ip
-  allow_private_access = module.septa_vpc.allow_private_access
 
 }
 
@@ -40,7 +39,6 @@ module "septa_ecs" {
   source = "./ecs"
 
   private_subnet = module.septa_vpc.private_subnet
-  allow_private_access = module.septa_vpc.allow_private_access
 
 }
 

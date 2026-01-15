@@ -22,8 +22,3 @@ variable "client_ip" {
   type = string
   description = "Client Public IP"
 }
-
-variable "allow_private_access" {
-    type = string
-    description = "Security group ID allowing private access"
-}
