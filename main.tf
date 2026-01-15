@@ -27,11 +27,12 @@ module "septa_networking" {
   public_subnet_cidr_block = var.public_subnet_cidr_block
   private_subnet_cidr_block = var.private_subnet_cidr_block
   availability_zone = var.availability_zone
-  client_ip = var.client_ip
 }
 
 module "septa_ecr" {
   source = "./ecr"
+
+  septa-repository-name = var.septa-repository-name
   
 }
 

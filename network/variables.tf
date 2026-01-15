@@ -17,8 +17,3 @@ variable "availability_zone" {
   type        = list(string)
   description = "The availability zone for the subnet"
 }
-
-variable "client_ip" {
-  type = string
-  description = "Client Public IP"
-}
