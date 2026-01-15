@@ -79,4 +79,10 @@ resource "aws_ecs_service" "septa_ecs_service" {
     security_groups = [var.security_group_allow_private_access]
     assign_public_ip = false
   }
+
+  load_balancer {
+    target_group_arn = var.septa_tg
+    container_name   = "septa-webapp"
+    container_port   = 80
+  }
 }

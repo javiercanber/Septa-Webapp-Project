@@ -17,3 +17,8 @@ variable "security_group_allow_private_access" {
   type = string
   description = "Security Group ID allowing private access"
 }
+
+variable "septa_tg" { 
+  type = string
+  description = "ARN of the Septa Target Group"
+}
