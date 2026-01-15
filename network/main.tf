@@ -5,12 +5,17 @@ data "aws_availability_zones" "available" {
 # VPC Resource for Septa Project
 resource "aws_vpc" "septa_vpc" {
   cidr_block       = var.cidr_block
+  enable_dns_support   = true
+  enable_dns_hostnames = true
 }
 
 # Public Subnet for Septa Project
 resource "aws_subnet" "public_subnet" {
+  for_each = toset(var.public_subnet_cidr_block)
   vpc_id            = aws_vpc.septa_vpc.id
-  cidr_block        = var.public_subnet_cidr_block
+  cidr_block        = each.value
+  availability_zone = data.aws_availability_zones.available.names[index(var.public_subnet_cidr_block, each.value)]
+  map_public_ip_on_launch = true
 }
 
 # Private Subnets for Septa Webapp Containers
@@ -71,9 +76,9 @@ resource "aws_lb" "alb_septa" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_private_access.id]
-  subnets            = [for subnet in aws_subnet.private_subnet : subnet.id]
+  subnets            = [for subnet in aws_subnet.public_subnet : subnet.id]
 
-  enable_deletion_protection = true
+  enable_deletion_protection = false
 
 }
 
