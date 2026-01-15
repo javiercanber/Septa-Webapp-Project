@@ -71,7 +71,7 @@ resource "aws_lb" "alb_septa" {
   internal           = false
   load_balancer_type = "application"
   security_groups    = [aws_security_group.allow_private_access.id]
-  subnets            = [for subnet in aws_subnet.public_subnet : subnet.id]
+  subnets            = [for subnet in aws_subnet.private_subnet : subnet.id]
 
   enable_deletion_protection = true
 
