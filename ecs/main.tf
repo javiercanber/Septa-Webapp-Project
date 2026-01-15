@@ -81,7 +81,7 @@ resource "aws_ecs_service" "septa_ecs_service" {
   }
 
   load_balancer {
-    target_group_arn = aws_lb_target_group.septa_tg.arn
+    target_group_arn = var.septa_tg
     container_name   = "septa-webapp"
     container_port   = 80
   }
