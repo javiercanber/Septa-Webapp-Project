@@ -23,11 +23,11 @@ module "septa_networking" {
   
   source = "./network"
 
-  cidr_block = module.septa_networking.cidr_block
-  public_subnet_cidr_block = module.septa_networking.public_subnet_cidr_block
-  private_subnet_cidr_block = module.septa_networking.private_subnet_cidr_block
-  availability_zone = module.septa_networking.availability_zone
-  client_ip = module.septa_networking.client_ip
+  cidr_block = var.cidr_block
+  public_subnet_cidr_block = var.public_subnet_cidr_block
+  private_subnet_cidr_block = var.private_subnet_cidr_block
+  availability_zone = var.availability_zone
+  client_ip = var.client_ip
 }
 
 module "septa_ecr" {
