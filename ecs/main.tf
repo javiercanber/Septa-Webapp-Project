@@ -8,6 +8,12 @@ resource "aws_ecs_cluster" "septa_ecs_cluster" {
   }
 }
 
+# CloudWatch Log Group for ECS Task Logs
+resource "aws_cloudwatch_log_group" "septa_logs" {
+  name              = "/ecs/septa-webapp-logs"
+  retention_in_days = 1
+}
+
 # Security Group Ingress Rule to Allow HTTPS Access from ECS to ECR
 resource "aws_vpc_security_group_ingress_rule" "allow_https_from_ecs" {
 
