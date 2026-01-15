@@ -27,7 +27,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_https_from_ecs" {
 
 # Security Group Egress Rule to Allow All Outbound Traffic
 resource "aws_vpc_security_group_egress_rule" "allow_all_egress" {
-  security_group_id = var.security_group_allow_private_access.id
+  security_group_id = var.security_group_allow_private_access
   cidr_ipv4         = "0.0.0.0/0"
   ip_protocol       = "-1"
 }
