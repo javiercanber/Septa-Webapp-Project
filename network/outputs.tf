@@ -1,5 +1,5 @@
 output "private_subnet" {
-  value = aws_subnet.private_subnet.id
+  value = aws_subnet.private_subnet[each.key]
 }
 
 output "security_group_allow_private_access" {
