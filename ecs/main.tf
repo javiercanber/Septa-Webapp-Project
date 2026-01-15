@@ -51,8 +51,8 @@ resource "aws_ecs_service" "septa_ecs_service" {
   desired_count   = 2
 
   network_configuration {
-    subnets         = [for s in aws_subnet.private_subnet : s.id]
-    security_groups = [aws_security_group.allow_private_access.id]
+    subnets         = [for s in aws_subnet.private_subnet_cidr_blocks : s.id]
+    security_groups = [var.security_group_allow_private_access]
     assign_public_ip = false
   }
 }
