@@ -18,7 +18,7 @@ resource "aws_subnet" "private_subnet" {
   for_each = toset(var.private_subnet_cidr_block)
   vpc_id            = aws_vpc.septa_vpc.id
   cidr_block        = each.value
-  availability_zone = data.aws_availability_zones.available.names[0]
+  availability_zone = data.aws_availability_zones.available.names[index(var.private_subnet_cidr_block, each.value)]
 }
 
 # Private Route Table for Private Subnets
