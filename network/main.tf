@@ -53,6 +53,15 @@ resource "aws_route_table" "public_route_table" {
   }
 }
 
+# Ingress Rule to Allow Public HTTP Access
+resource "aws_vpc_security_group_ingress_rule" "allow_public_http" {
+  security_group_id = aws_security_group.allow_private_access.id
+  
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
 
 # Security Group for Application Load Balancer
 resource "aws_security_group" "allow_private_access" {
