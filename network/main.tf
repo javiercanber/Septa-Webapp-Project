@@ -70,6 +70,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow_access_ecs" {
   to_port           = 80
 }
 
+
 # Application Load Balancer
 resource "aws_lb" "alb_septa" {
   name               = "septa-alb"

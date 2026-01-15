@@ -8,6 +8,17 @@ resource "aws_ecs_cluster" "septa_ecs_cluster" {
   }
 }
 
+# Security Group Ingress Rule to Allow HTTPS Access from ECS to ECR
+resource "aws_vpc_security_group_ingress_rule" "allow_https_from_ecs" {
+
+  security_group_id = var.security_group_allow_private_access
+  referenced_security_group_id = var.security_group_allow_private_access
+  
+  from_port   = 443
+  ip_protocol = "tcp"
+  to_port     = 443
+}
+
 resource "aws_ecs_task_definition" "septa_task_definition" {
   family                   = "septa-task-webapp"
   network_mode             = "awsvpc"
