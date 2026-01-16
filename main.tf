@@ -8,6 +8,15 @@ terraform {
   }
 }
 
+terraform {
+  cloud {
+    organization = "deep-dive-JC" 
+    workspaces {
+      name = "Septa-Webapp-Project"
+    }
+  }
+}
+
 provider "aws" {
   region = var.region
 
