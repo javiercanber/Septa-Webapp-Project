@@ -32,10 +32,10 @@ jobs:
 
   # PHASE 1: Apply Networking & ECR module
       - name: Terraform Apply Network/ECR Modules & Export Outputs
+        id: ecr_info
         run: |
           terraform apply -auto-approve -target=module.septa_networking -target=module.septa_ecr -auto-approve
-          echo "ECR_REGISTRY=$(terraform output -raw repository_url | cut -d'/' -f1)" >> $GITHUB_ENV
-          echo "ECR_REPO_NAME=$(terraform output -raw septa-repository-name)" >> $GITHUB_ENV
+          echo "ECR_REPO_NAME=$(terraform output -raw septa-repository-name)" >> $GITHUB_OUTPUT
 
   # AWS Authentication
       - name: Configure AWS Credentials
@@ -47,13 +47,14 @@ jobs:
 
   # Login to ECR
       - name: Login to Amazon ECR
-        id: ecr_login-ecr
+        id: login-ecr
         uses: aws-actions/amazon-ecr-login@v1
 
   # Docker build and push image to ECR repository     
       - name: Build, Tag and push image to ECR
         env:
-          ECR_REGISTRY: ${{ steps.ecr_login-ecr.outputs.registry }}
+          ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
+          ECR_REPO_NAME: ${{ steps.ecr_info.outputs.repository_name }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
           docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ env.IMAGE_TAG }} ./docker
