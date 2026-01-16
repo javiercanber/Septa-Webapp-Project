@@ -31,7 +31,7 @@ jobs:
       - name: Terraform Apply Network/ECR Modules & Export Outputs
         run: |
           terraform apply -auto-approve -target=module.septa_networking -target=module.septa_ecr -auto-approve
-          echo "ECR_REGISTRY=$(terraform output -raw repository_url | cut -d'/' -f2)" >> $GITHUB_ENV
+          echo "ECR_REGISTRY=$(terraform output -raw repository_url | cut -d'/' -f1)" >> $GITHUB_ENV
           echo "AWS_REGION=$(terraform output -raw region)" >> $GITHUB_ENV
           echo "ECR_REPO_NAME=$(terraform output -raw septa-repository-name)" >> $GITHUB_ENV
 
@@ -41,7 +41,7 @@ jobs:
         with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          aws-region: ${{ env.AWS_REGION }}
+          aws-region: ${{ vars.AWS_REGION }}
 
   # Docker build and push image to ECR repository     
       - name: Build, Tag and push image to ECR
