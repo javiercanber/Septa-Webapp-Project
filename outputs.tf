@@ -3,7 +3,7 @@ output "repository_url" {
 }
 
 output "septa-repository-name" {
-  value = module.septa_ecr.name
+  value = module.septa_ecr.septa-repository-name
 }
 
 output "region" {
