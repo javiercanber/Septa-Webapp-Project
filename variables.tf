@@ -37,3 +37,8 @@ variable "septa-repository-name" {
   type = string
   description = "ECR Repository Name"
 }
+
+variable "container_tag_image" {
+  type        = string
+  description = "Tag of the container image to deploy"
+}

@@ -42,6 +42,7 @@ module "septa_ecs" {
   security_group_allow_private_access = module.septa_networking.security_group_allow_private_access
   septa_tg = module.septa_networking.septa_tg
   repository_url = module.septa_ecr.repository_url
+  container_tag_image = var.container_tag_image
   private_subnet_cidr_blocks = module.septa_networking.private_subnet_cidr_blocks
   region = var.region
 
