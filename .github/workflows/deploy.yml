@@ -5,6 +5,9 @@ on:
     branches:
       - main
 
+env:
+  TF_VAR_container_tag_image: ${{ github.sha }}
+
 permissions:
   contents: read
   id-token: write
@@ -59,4 +62,4 @@ jobs:
   # PHASE 2: Apply ECS Service module     
       - name: Terraform Apply (ECS Service)
         run: |
-          terraform apply -auto-approve -target=module.septa_ecs -var="container_tag_image=${{ github.sha }}"
+          terraform apply -auto-approve -target=module.septa_ecs
