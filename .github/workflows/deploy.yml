@@ -53,10 +53,10 @@ jobs:
           ECR_REGISTRY: ${{ steps.ecr_login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }} ./docker
-          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }}
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ env.IMAGE_TAG }} ./docker
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ env.IMAGE_TAG }}
 
   # PHASE 2: Apply ECS Service module     
       - name: Terraform Apply (ECS Service)
         run: |
-          terraform apply -auto-approve -target=module.septa_ecs -auto-approve
+          terraform apply -auto-approve -target=module.septa_ecs -var="container_tag_image=${{ github.sha }}"
