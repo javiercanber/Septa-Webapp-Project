@@ -53,7 +53,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.ecr_login-ecr.outputs.registry }}
           IMAGE_TAG: ${{ github.sha }}
         run: |
-          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }} .
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }} ./docker
           docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }}
 
   # PHASE 2: Apply ECS Service module     
