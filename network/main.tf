@@ -60,16 +60,6 @@ resource "aws_route_table_association" "public_subnet_association" {
   route_table_id = aws_route_table.public_route_table.id
 }
 
-# Ingress Rule to Allow Public HTTP Access
-resource "aws_vpc_security_group_ingress_rule" "allow_public_http" {
-  security_group_id = aws_security_group.allow_private_access.id
-  
-  cidr_ipv4         = "0.0.0.0/0"
-  from_port         = 80
-  ip_protocol       = "tcp"
-  to_port           = 80
-}
-
 # Security Group for Application Load Balancer
 resource "aws_security_group" "allow_private_access" {
   name        = "allow-private-access"
@@ -86,6 +76,33 @@ resource "aws_vpc_security_group_ingress_rule" "allow_access_ecs" {
   to_port           = 80
 }
 
+# Ingress Rule to Allow Public HTTP Access
+resource "aws_vpc_security_group_ingress_rule" "allow_public_http" {
+  security_group_id = aws_security_group.allow_private_access.id
+  
+  cidr_ipv4         = "0.0.0.0/0"
+  from_port         = 80
+  ip_protocol       = "tcp"
+  to_port           = 80
+}
+
+# Security Group Ingress Rule to Allow HTTPS Access from ECS to ECR
+resource "aws_vpc_security_group_ingress_rule" "allow_https_from_ecs" {
+
+  security_group_id = aws_security_group.allow_private_access.id
+  referenced_security_group_id = aws_security_group.allow_private_access.id
+  
+  from_port   = 443
+  ip_protocol = "tcp"
+  to_port     = 443
+}
+
+# Security Group Egress Rule to Allow All Outbound Traffic
+resource "aws_vpc_security_group_egress_rule" "allow_all_egress" {
+  security_group_id = aws_security_group.allow_private_access.id
+  cidr_ipv4         = "0.0.0.0/0"
+  ip_protocol       = "-1"
+}
 
 # Application Load Balancer
 resource "aws_lb" "alb_septa" {

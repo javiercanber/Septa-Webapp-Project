@@ -1,0 +1,58 @@
+name: "Septa Webapp - Deployement"
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  terraform-and-docker:
+    name: "Deploy phase"
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+  # HCP Terraform Configuration
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
+          terraform_wrapper: false
+
+      - name: Terraform Init
+        run: terraform init
+
+  # PHASE 1: Apply Networking & ECR module
+      - name: Terraform Apply Network/ECR Modules & Export Outputs
+        run: |
+          terraform apply -auto-approve -target=module.septa_networking -target=module.septa_ecr -auto-approve
+          echo "ECR_REGISTRY=$(terraform output -raw repository_url | cut -d'/' -f2)" >> $GITHUB_ENV
+          echo "AWS_REGION=$(terraform output -raw region)" >> $GITHUB_ENV
+          echo "ECR_REPO_NAME=$(terraform output -raw septa-repository-name)" >> $GITHUB_ENV
+
+  # AWS Authentication
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+  # Docker build and push image to ECR repository     
+      - name: Build, Tag and push image to ECR
+        env:
+          ECR_REGISTRY: ${{ steps.ecr_login.outputs.registry }}
+          IMAGE_TAG: ${{ github.sha }}
+        run: |
+          docker build -t ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }} .
+          docker push ${{ env.ECR_REGISTRY }}/${{ env.ECR_REPO_NAME }}:${{ github.sha }}
+
+  # PHASE 2: Apply ECS Service module     
+      - name: Terraform Apply (ECS Service)
+        run: |
+          terraform apply -auto-approve -target=module.septa_ecs -auto-approve

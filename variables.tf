@@ -33,7 +33,12 @@ variable "availability_zone" {
   description = "The availability zone for the subnet"
 }
 
-variable "client_ip" {
+variable "septa-repository-name" {
   type = string
-  description = "Client Public IP"
+  description = "ECR Repository Name"
+}
+
+variable "container_tag_image" {
+  type        = string
+  description = "Tag of the container image to deploy"
 }

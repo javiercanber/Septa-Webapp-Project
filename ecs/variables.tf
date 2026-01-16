@@ -22,3 +22,8 @@ variable "septa_tg" {
   type = string
   description = "ARN of the Septa Target Group"
 }
+
+variable "container_tag_image" {
+  type        = string
+  description = "Tag of the container image to deploy"
+}

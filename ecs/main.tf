@@ -14,24 +14,6 @@ resource "aws_cloudwatch_log_group" "septa_logs" {
   retention_in_days = 1
 }
 
-# Security Group Ingress Rule to Allow HTTPS Access from ECS to ECR
-resource "aws_vpc_security_group_ingress_rule" "allow_https_from_ecs" {
-
-  security_group_id = var.security_group_allow_private_access
-  referenced_security_group_id = var.security_group_allow_private_access
-  
-  from_port   = 443
-  ip_protocol = "tcp"
-  to_port     = 443
-}
-
-# Security Group Egress Rule to Allow All Outbound Traffic
-resource "aws_vpc_security_group_egress_rule" "allow_all_egress" {
-  security_group_id = var.security_group_allow_private_access
-  cidr_ipv4         = "0.0.0.0/0"
-  ip_protocol       = "-1"
-}
-
 resource "aws_ecs_task_definition" "septa_task_definition" {
   family                   = "septa-task-webapp"
   network_mode             = "awsvpc"
