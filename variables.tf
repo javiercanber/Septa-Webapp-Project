@@ -42,3 +42,13 @@ variable "container_tag_image" {
   type        = string
   description = "Tag of the container image to deploy"
 }
+
+variable "organization" {
+  type = string
+  description = "HCP TF Organization name"
+}
+
+variable "workspace" {
+  type = string
+  description = "HCP TF Workspace name"
+}
