@@ -10,9 +10,9 @@ terraform {
 
 terraform {
   cloud {
-    organization = var.organization
+    organization = "deep-dive-JC" 
     workspaces {
-      name = var.workspace
+      name = "Septa-Webapp-Project"
     }
   }
 }
