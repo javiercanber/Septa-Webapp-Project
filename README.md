@@ -1,9 +1,11 @@
 ## 🎯 Septa AWS Project
 
-Este proyecto personal consiste en la creación y despliegue de una webapp a través de una imagen Docker que es enviada hacia un repositorio ECR donde posteriomente el servicio de ECS creará los contenedores necesarios para permitir al usuario final
+Este proyecto personal consiste en la creación y despliegue de una webapp a través de una imagen Docker. Dicha imagen es enviada hacia un repositorio ECR donde posteriomente el servicio de ECS creará los contenedores necesarios para permitir al usuario final
 acceder a la web correctamente.
 
 ### 🏛️ Arquitectura
+
+<img src="./assets/images/Septa_Architecture.png" width="900" alt="Arquitectura Septa">
 
 Para garantizar la resiliencia y la eficiencia, la infraestructura se ha diseñado con los siguientes pilares:
 
